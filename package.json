@@ -11,7 +11,10 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-markdown": "^5.0.3",
+=======
+>>>>>>> c019fe2ef4f78ac230f68f2591b684f61204ebc7
     "react-moment": "^1.1.1",
     "react-scripts": "4.0.3",
     "react-spinners": "^0.10.6",
