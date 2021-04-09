@@ -1,13 +1,32 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Media } from "react-bootstrap";
 import { MoonLoader } from "react-spinners";
 
-const IssueModal = ({ issue }) => {
+const Comment = ({ user }) => {
+  return (
+    <Media as="li">
+      <Media.Body></Media.Body>
+    </Media>
+  );
+};
+
+const IssueModal = ({ issue, showModal, setShowModal }) => {
   return (
     issue && (
-      <Modal>
-        <Modal.Header>This is header</Modal.Header>
-        <Modal.Body>This is body</Modal.Body>
+      <Modal size="xl" show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>This is header</Modal.Header>
+        <Modal.Title>
+          <h3>Title of Issue</h3>
+        </Modal.Title>
+
+        <Modal.Body>
+          {/* Issue content */}
+          <React.Markdown />
+
+          <h4>Comments:</h4>
+          {/* comment list here */}
+          <ul></ul>
+        </Modal.Body>
       </Modal>
     )
   );
