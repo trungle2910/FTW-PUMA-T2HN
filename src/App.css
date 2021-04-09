@@ -16,7 +16,12 @@ body {
   }
 }
 .marrginIssuesList {
+  padding: 20px;
   margin-top: 50px;
+}
+.marrginIssuesList:hover {
+  border-radius: 50px;
+  background-color: #dbdacc;
 }
 .styleImgIssuesList {
   border-radius: 20px;
