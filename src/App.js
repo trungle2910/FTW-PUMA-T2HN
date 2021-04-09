@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import { Container } from "react-bootstrap";
 import Navbar from "./components/Navbar";
-import Searchform from "./components/Searchform";
+import IssuesList from "./components/IssuesList";
 
 function App() {
   const [owner, setOwner] = useState("facebook");
@@ -12,6 +12,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [dataIssues, setDataIssues] = useState([]);
 
   const url = `https://api.github.com/repos/${owner}/${repo}/issues`;
 
@@ -23,14 +24,16 @@ function App() {
       try {
         const res = await fetch(url);
         const data = await res.json();
+        setDataIssues(data);
         console.log(data);
       } catch (error) {
         setErrorMsg(`FETCH ISSUES ERROR: ${error.message}`);
+        alert(errorMsg);
       }
       setLoading(false);
     };
     fetchIssueData();
-  }, [owner, repo]);
+  }, [owner, repo, url]);
 
   function getOwnerAndRepo() {
     const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
@@ -61,11 +64,13 @@ function App() {
         fluid
         className=" justify-content-center align-content-center text-center"
       >
-        {loading ? (
-          <PacmanLoader color={"red"} size={30} margin={5} />
-        ) : (
-          <h1>Contents</h1>
-        )}
+        <div>
+          {loading ? (
+            <PacmanLoader color={"red"} size={30} margin={5} />
+          ) : (
+            <IssuesList data={dataIssues} />
+          )}
+        </div>
       </Container>
     </>
   );

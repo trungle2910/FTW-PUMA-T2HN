@@ -27,11 +27,6 @@ const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
           <img className="logo-re-size" src={logo} alt="coder-img" />
         </div>
 
-        <a class="navbar-brand" href="http://localhost:3000/">
-          {" "}
-          Home
-        </a>
-
         <div>
           <Form onSubmit={handleSubmit} className="form-search">
             <Form.Row>
