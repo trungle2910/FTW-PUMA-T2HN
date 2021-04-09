@@ -45,8 +45,7 @@ const IssuesList = ({ data }) => {
                         className="mr-2"
                         style={{ fontSize: "14px" }}
                       >
-                        Create at:
-                        <Moment>{listData.created_at}</Moment>
+                        Created at: <Moment>{listData.created_at}</Moment>
                       </Badge>
                     </span>
                     <span>
