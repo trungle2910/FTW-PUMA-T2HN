@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PacmanLoader from "react-spinners/PacmanLoader";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
+import IssuesList from "./components/IssuesList.js";
 
 // import components
 import SearchBar from "./components/SearchBar";
@@ -13,6 +14,7 @@ function App() {
   const [repo, setRepo] = useState("react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [dataIssues, setDataIssues] = useState([]);
 
   // state for modal
   const [selectedIssue, setSelectedIssue] = useState(null);
@@ -33,14 +35,16 @@ function App() {
         const url = `https://api.github.com/repos/${owner}/${repo}/issues`;
         const res = await fetch(url);
         const data = await res.json();
+        setDataIssues(data);
         console.log(data);
       } catch (error) {
         setErrorMsg(`FETCH ISSUES ERROR: ${error.message}`);
+        alert(errorMsg);
       }
       setLoading(false);
     };
     fetchIssueData();
-  }, [owner, repo]);
+  }, [owner, repo, errorMsg]);
 
   return (
     <div>
