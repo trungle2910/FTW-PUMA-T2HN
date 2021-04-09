@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+body {
+  background-color: #282c34;
+}
 
 .App-logo {
   height: 40vmin;
@@ -12,7 +15,16 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.marrginIssuesList {
+  margin-top: 50px;
+}
+.styleImgIssuesList {
+  border-radius: 20px;
+  transition: transform 0.7s ease-in-out;
+}
+.styleImgIssuesList:hover {
+  transform: rotate(360deg);
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
