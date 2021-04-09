@@ -1,38 +1,39 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Sarpanch:900");
+
+.nav-text {
+  transform: skew(#{$rotationAmt}deg) rotate(#{$rotationAmt}deg);
+  grid-area: text;
+  font-family: "Sarpanch", sans-serif;
+  font-size: 50px;
+  margin: 0 auto;
+  padding: 30px;
+  color: black;
+  text-shadow: 1vmin 1vmin 0 #e79c10, -1vmin -1vmin 0 #cd5c5c;
+}
+
+.nav-text {
+  padding-top: 20px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.github-re-size {
+  padding-right: 20px;
+  height: 60px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo-re-size {
+  width: 130px;
+  height: 50px;
+  border: solid black;
+  background-color: white;
+  border-radius: 30px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-search {
+  padding-top: 10px;
+}
+.navbar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  justify-content: space-between;
+  align-content: center;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(to right, #ff5858, #f857a6);
 }
