@@ -14,7 +14,7 @@ const SearchBar = ({
           <Form.Control
             placeholder="Search..."
             value={searchInput}
-            onchange={handleInputChange}
+            onChange={handleInputChange}
           />
         </Col>
 
