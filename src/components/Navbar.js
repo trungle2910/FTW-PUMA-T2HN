@@ -6,13 +6,31 @@ import { Form, Button, Col } from "react-bootstrap";
 const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
   return (
     <>
+
       <nav className="navbar">
+
         <div className="logo">
           <img className="logo-re-size" src={logo} alt="coder-img" />
         </div>
 
         <div>
-          <Form onSubmit={handleSubmit} className="form-search">
+          <Form>
+            <Form.Row>
+              <Col>
+                <Form.Control
+                  className="search-input"
+                  placeholder="{Search...}"
+                  aria-label={searchInput}
+                  aria-describedby="basic-addon1"
+                  onChange={handleInputChange}
+                ></Form.Control>
+              </Col>
+              <Col>
+                <Button variant="success">Success</Button>{" "}
+              </Col>
+            </Form.Row>
+          </Form>
+          { <Form onSubmit={handleSubmit} className="form-search">
             <Form.Row>
               <Col>
                 <Form.Control
@@ -24,13 +42,15 @@ const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
                 />
               </Col>
               {loading ? (
+
                 <Button variant="info" type="button" disabled>
+
                   <span
                     className="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
-                  Searching...
+                  {searchInput}
                 </Button>
               ) : (
                 <Button type="submit" variant="success" disabled={!searchInput}>
@@ -38,7 +58,7 @@ const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
                 </Button>
               )}
             </Form.Row>
-          </Form>
+          </Form> 
         </div>
         <div>
           <a href="https://github.com/trungle2910/FTW-PUMA-T2HN">
