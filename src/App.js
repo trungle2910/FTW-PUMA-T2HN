@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 // <<<<<<< Hoang
 import { Button, Container } from "react-bootstrap";
 import IssuesList from "./components/IssuesList.js";
@@ -14,8 +14,8 @@ import Navbar from "./components/Navbar";
 // >>>>>>> master
 
 function App() {
-  const [owner, setOwner] = useState("");
-  const [repo, setRepo] = useState("");
+  const [owner, setOwner] = useState("facebook");
+  const [repo, setRepo] = useState("react");
   const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -77,18 +77,18 @@ function App() {
     setRepo(repo);
   };
   return (
-// <<<<<<< Hoang
-//     <div>
-//       {loading ? (
-//         <PacmanLoader color={"red"} size={30} margin={5} />
-//       ) : (
-//         <>
-//           <IssuesList data={dataIssues} />
-//         </>
-//       )}
-     
-//     </div>
-// =======
+    // <<<<<<< Hoang
+    //     <div>
+    //       {loading ? (
+    //         <PacmanLoader color={"red"} size={30} margin={5} />
+    //       ) : (
+    //         <>
+    //           <IssuesList data={dataIssues} />
+    //         </>
+    //       )}
+
+    //     </div>
+    // =======
     <>
       <Navbar
         searchInput={searchInput}
@@ -103,19 +103,23 @@ function App() {
       >
         <div>
           {loading ? (
-            <PacmanLoader color={"red"} size={30} margin={5} />
+            <div style={{ marginTop: "100px" }}>
+              <ClimbingBoxLoader color={"#36D7B7"} size={50} />
+            </div>
           ) : (
             <IssuesList data={dataIssues} />
-             <PaginationA
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        totalPageNum={totalPageNum}
-      />
           )}
+        </div>
+        <div className="fixed-bottom">
+          <PaginationA
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+            totalPageNum={totalPageNum}
+          />
         </div>
       </Container>
     </>
-// >>>>>>> master
+    // >>>>>>> master
   );
 }
 
