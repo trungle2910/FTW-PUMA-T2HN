@@ -70,19 +70,19 @@ function App() {
     fetchIssueData();
   }, [owner, repo, pageNum]);
 
-  // function getOwnerAndRepo() {
-  //   const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
-  //   const withoutRepo = searchInput.substring(0, searchInput.lastIndexOf("/"));
-  //   const owner = withoutRepo.substring(withoutRepo.lastIndexOf("/") + 1);
-  //   return { repo, owner };
-  // }
+  function getOwnerAndRepo() {
+    const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
+    const withoutRepo = searchInput.substring(0, searchInput.lastIndexOf("/"));
+    const owner = withoutRepo.substring(withoutRepo.lastIndexOf("/") + 1);
+    return { repo, owner };
+  }
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
   };
 
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
-    // const { owner, repo } = getOwnerAndRepo();
+    const { owner, repo } = getOwnerAndRepo();
     setOwner(owner);
     setRepo(repo);
   };

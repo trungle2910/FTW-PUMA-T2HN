@@ -10,6 +10,7 @@ const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
         <div className="logo">
           <img className="logo-re-size" src={logo} alt="coder-img" />
         </div>
+
         <div>
           <Form onSubmit={handleSubmit} className="form-search">
             <Form.Row>
@@ -29,7 +30,7 @@ const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
                     role="status"
                     aria-hidden="true"
                   ></span>
-                  {searchInput}
+                  Searching...
                 </Button>
               ) : (
                 <Button type="submit" variant="success" disabled={!searchInput}>
