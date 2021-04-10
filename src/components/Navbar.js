@@ -3,26 +3,10 @@ import logo from "../image/logo.svg";
 import github from "../image/github.png";
 import { Form, Button, Col } from "react-bootstrap";
 
-const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
+const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
   return (
     <>
-      {/* <nav className="nav">
-        <div>
-          <img className="logo-re-size" src={logo} alt="coder-img" />
-        </div>
-        <div>
-          <a href="https://github.com/coderschool/ftw_w5_github_issues">
-            {" "}
-            <img
-              className="github-re-size"
-              src={github}
-              alt="github-img"
-            />{" "}
-          </a>
-        </div>
-      </nav> */}
-
-      <nav class="navbar">
+      <nav className="navbar">
         <div className="logo">
           <img className="logo-re-size" src={logo} alt="coder-img" />
         </div>
@@ -32,15 +16,15 @@ const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
             <Form.Row>
               <Col>
                 <Form.Control
-                  className="search-input"
-                  placeholder="Search"
-                  aria-label="Search"
-                  aria-describedby="basic-addon1"
+                  id="search-input"
+                  type="text"
+                  placeholder="Search.."
+                  value={searchInput}
                   onChange={handleInputChange}
                 />
               </Col>
               {loading ? (
-                <Button variant="primary" type="button" disabled>
+                <Button variant="info" type="button" disabled>
                   <span
                     className="spinner-border spinner-border-sm"
                     role="status"
@@ -57,7 +41,7 @@ const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
           </Form>
         </div>
         <div>
-          <a href="https://github.com/coderschool/ftw_w5_github_issues">
+          <a href="https://github.com/trungle2910/FTW-PUMA-T2HN">
             {" "}
             <img
               className="github-re-size"
