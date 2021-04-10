@@ -7,8 +7,8 @@ import Navbar from "./components/Navbar";
 import IssuesList from "./components/IssuesList";
 
 function App() {
-  const [owner, setOwner] = useState("facebook");
-  const [repo, setRepo] = useState("react");
+  const [owner, setOwner] = useState("");
+  const [repo, setRepo] = useState("");
   const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,19 +35,19 @@ function App() {
     fetchIssueData();
   }, [owner, repo, url]);
 
-  function getOwnerAndRepo() {
-    const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
-    const withoutRepo = searchInput.substring(0, searchInput.lastIndexOf("/"));
-    const owner = withoutRepo.substring(withoutRepo.lastIndexOf("/") + 1);
-    return { repo, owner };
-  }
+  // function getOwnerAndRepo() {
+  //   const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
+  //   const withoutRepo = searchInput.substring(0, searchInput.lastIndexOf("/"));
+  //   const owner = withoutRepo.substring(withoutRepo.lastIndexOf("/") + 1);
+  //   return { repo, owner };
+  // }
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
   };
 
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
-    const { owner, repo } = getOwnerAndRepo();
+    // const { owner, repo } = getOwnerAndRepo();
     setOwner(owner);
     setRepo(repo);
   };
