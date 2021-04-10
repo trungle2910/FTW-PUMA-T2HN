@@ -77,18 +77,6 @@ function App() {
     setRepo(repo);
   };
   return (
-    // <<<<<<< Hoang
-    //     <div>
-    //       {loading ? (
-    //         <PacmanLoader color={"red"} size={30} margin={5} />
-    //       ) : (
-    //         <>
-    //           <IssuesList data={dataIssues} />
-    //         </>
-    //       )}
-
-    //     </div>
-    // =======
     <>
       <Navbar
         searchInput={searchInput}
@@ -104,7 +92,7 @@ function App() {
         <div>
           {loading ? (
             <div style={{ marginTop: "100px" }}>
-              <ClimbingBoxLoader color={"#36D7B7"} size={50} />
+              <ClimbingBoxLoader color={"#f0b6cd"} size={50} />
             </div>
           ) : (
             <IssuesList data={dataIssues} />

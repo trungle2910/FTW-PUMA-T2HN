@@ -8,19 +8,19 @@ const IssuesList = ({ data }) => {
   return (
     <Container>
       <ul className="list-unstyled">
-        {data.map((listData) => {
+        {data.map((itemData) => {
           return (
-            <Media className="marrginIssuesList">
+            <Media className="marrginIssuesList" key={itemData.id}>
               <img
                 width={200}
                 height={200}
                 className="mr-5 styleImgIssuesList"
-                src={listData.user.avatar_url}
+                src={itemData.user.avatar_url}
                 alt="Generic placeholder"
               />
               <Media.Body>
                 <div>
-                  <h2>{listData.title}</h2>
+                  <h2>{itemData.title}</h2>
                   <div>
                     <span>
                       <FontAwesomeIcon
@@ -35,7 +35,7 @@ const IssuesList = ({ data }) => {
                         className="mr-2"
                         style={{ fontSize: "14px" }}
                       >
-                        @{listData.user.login}
+                        @{itemData.user.login}
                       </Badge>
                     </span>
                     <span>
@@ -45,7 +45,7 @@ const IssuesList = ({ data }) => {
                         className="mr-2"
                         style={{ fontSize: "14px" }}
                       >
-                        Created at: <Moment>{listData.created_at}</Moment>
+                        Created at: <Moment>{itemData.created_at}</Moment>
                       </Badge>
                     </span>
                     <span>
@@ -56,7 +56,7 @@ const IssuesList = ({ data }) => {
                         style={{ fontSize: "14px" }}
                       >
                         Last update:{" "}
-                        <Moment fromNow>{listData.updated_at}</Moment>
+                        <Moment fromNow>{itemData.updated_at}</Moment>
                       </Badge>
                     </span>
                     <span>
@@ -66,14 +66,14 @@ const IssuesList = ({ data }) => {
                         className="mr-2"
                         style={{ fontSize: "14px" }}
                       >
-                        Comment: {listData.comments}
+                        Comment: {itemData.comments}
                       </Badge>
                     </span>
                   </div>
                   <p className="mr-5">
-                    {listData.body.length <= 400
-                      ? listData.body
-                      : listData.body.slice(0, 400) + "......"}
+                    {itemData.body.length <= 400
+                      ? itemData.body
+                      : itemData.body.slice(0, 400) + "......"}
                   </p>
                 </div>
                 <FontAwesomeIcon
@@ -82,7 +82,7 @@ const IssuesList = ({ data }) => {
                   className="mr-2 "
                   style={{ fontSize: "25px", color: "f54e8e" }}
                 />
-                {listData.labels.map((label) => (
+                {itemData.labels.map((label) => (
                   <Badge
                     pill
                     variant="info"

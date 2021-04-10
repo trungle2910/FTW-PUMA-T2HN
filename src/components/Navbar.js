@@ -6,7 +6,7 @@ import { Form, Button, Col } from "react-bootstrap";
 const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
   return (
     <>
-      <nav class="navbar">
+      <nav className="navbar">
         <div className="logo">
           <img className="logo-re-size" src={logo} alt="coder-img" />
         </div>
@@ -57,7 +57,7 @@ const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
           </Form> */}
         </div>
         <div>
-          <a href="https://github.com/coderschool/ftw_w5_github_issues">
+          <a href="https://github.com/trungle2910/FTW-PUMA-T2HN">
             {" "}
             <img
               className="github-re-size"
