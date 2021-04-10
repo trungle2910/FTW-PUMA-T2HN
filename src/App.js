@@ -18,8 +18,8 @@ import SearchBar from "./components/SearchBar";
 import IssueModal from "./components/IssueModal";
 
 function App() {
-  const [owner, setOwner] = useState("facebook");
-  const [repo, setRepo] = useState("react");
+  const [owner, setOwner] = useState("");
+  const [repo, setRepo] = useState("");
   const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -67,7 +67,7 @@ function App() {
           setErrorMsg(`FETCH ISSUES ERROR: ${data.message}`);
         }
       } catch (error) {
-        setErrorMsg(`FETCH ISSUES ERROR: ${error.message}`);
+        setErrorMsg("FETCH ISSUES ERROR:", error.message);
         alert(errorMsg);
       }
       setLoading(false);
