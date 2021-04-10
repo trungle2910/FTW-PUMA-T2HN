@@ -3,7 +3,7 @@ import logo from "../image/logo.svg";
 import github from "../image/github.png";
 import { Form, Button, Col } from "react-bootstrap";
 
-const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
+const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
   return (
     <>
       {/* <nav className="nav">
@@ -22,7 +22,7 @@ const Navbar = (searchInput, handleInputChange, handleSubmit, loading) => {
         </div>
       </nav> */}
 
-      <nav class="navbar">
+      <nav className="navbar">
         <div className="logo">
           <img className="logo-re-size" src={logo} alt="coder-img" />
         </div>

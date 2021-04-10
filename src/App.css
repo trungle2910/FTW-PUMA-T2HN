@@ -68,3 +68,51 @@ body {
   border-radius: 0;
   background: linear-gradient(to right, #ff5858, #f857a6);
 }
+
+/*
+  Issue Modal style
+*/
+.modal-title {
+  background-color: #bdc3c7;
+}
+
+.issue-content {
+  overflow-x: scroll;
+  border: 2px solid green;
+  border-radius: 10px;
+  padding: 15px 20px;
+  background-color: peachpuff;
+}
+
+.horizontal-line {
+  border: 1px solid black;
+}
+
+.comment {
+  border: 1px solid #b8b8b8;
+  border-radius: 10px;
+  overflow-x: scroll;
+}
+
+.comment-header {
+  padding: 5px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.comment-user-name {
+  font-weight: bolder;
+  color: #34495e;
+  font-size: 1.25rem;
+}
+
+.modal-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.comment-content {
+  background-color: #f2f2f2;
+  padding: 10px;
+}
