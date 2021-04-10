@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+// <<<<<<< Hoang
 import { Button, Container } from "react-bootstrap";
 import IssuesList from "./components/IssuesList.js";
 import PaginationA from "./components/Pagination";
+import Navbar from "./components/Navbar";
+// =======
+// import { Container } from "react-bootstrap";
+
+// // import IssuesList from "./components/IssuesList";
+// >>>>>>> master
 
 function App() {
   const [owner, setOwner] = useState("facebook");
   const [repo, setRepo] = useState("react");
+  const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [dataIssues, setDataIssues] = useState([]);
@@ -52,21 +60,66 @@ function App() {
     fetchIssueData();
   }, [owner, repo, pageNum]);
 
+  // function getOwnerAndRepo() {
+  //   const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
+  //   const withoutRepo = searchInput.substring(0, searchInput.lastIndexOf("/"));
+  //   const owner = withoutRepo.substring(withoutRepo.lastIndexOf("/") + 1);
+  //   return { repo, owner };
+  // }
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchFormSubmit = (event) => {
+    event.preventDefault();
+    // const { owner, repo } = getOwnerAndRepo();
+    setOwner(owner);
+    setRepo(repo);
+  };
   return (
-    <div>
-      {loading ? (
-        <PacmanLoader color={"red"} size={30} margin={5} />
-      ) : (
-        <>
-          <IssuesList data={dataIssues} />
-        </>
-      )}
-      <PaginationA
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        totalPageNum={totalPageNum}
+    // <<<<<<< Hoang
+    //     <div>
+    //       {loading ? (
+    //         <PacmanLoader color={"red"} size={30} margin={5} />
+    //       ) : (
+    //         <>
+    //           <IssuesList data={dataIssues} />
+    //         </>
+    //       )}
+
+    //     </div>
+    // =======
+    <>
+      <Navbar
+        searchInput={searchInput}
+        handleInputChange={handleSearchInputChange}
+        handleSubmit={handleSearchFormSubmit}
+        loading={loading}
       />
-    </div>
+      <h1 className="nav-text"> Github Issues </h1>
+      <Container
+        fluid
+        className=" justify-content-center align-content-center text-center"
+      >
+        <div>
+          {loading ? (
+            <div style={{ marginTop: "100px" }}>
+              <ClimbingBoxLoader color={"#36D7B7"} size={50} />
+            </div>
+          ) : (
+            <IssuesList data={dataIssues} />
+          )}
+        </div>
+        <div className="fixed-bottom">
+          <PaginationA
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+            totalPageNum={totalPageNum}
+          />
+        </div>
+      </Container>
+    </>
+    // >>>>>>> master
   );
 }
 
