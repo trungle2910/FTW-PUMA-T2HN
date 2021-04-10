@@ -13,6 +13,10 @@ import Navbar from "./components/Navbar";
 // // import IssuesList from "./components/IssuesList";
 // >>>>>>> master
 
+// import components
+import SearchBar from "./components/SearchBar";
+import IssueModal from "./components/IssueModal";
+
 function App() {
   const [owner, setOwner] = useState("facebook");
   const [repo, setRepo] = useState("react");
@@ -23,7 +27,16 @@ function App() {
   const [pageNum, setPageNum] = useState(1);
   const [totalPageNum, setTotalPageNum] = useState(1);
 
-  // const url = `https://api.github.com/repos/${owner}/${repo}/issues`;
+  // state for modal
+  const [selectedIssue, setSelectedIssue] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const showDetail = (item) => {
+    setShowModal(true);
+
+    setSelectedIssue(item);
+  };
+
 
   // fetch issue data cơ bản chỉ với base url
   useEffect(() => {
@@ -31,7 +44,9 @@ function App() {
       if (!owner || !repo) return;
       setLoading(true);
       try {
+
         const url = `https://api.github.com/repos/${owner}/${repo}/issues?page=${pageNum}&per_page=20`;
+
         const res = await fetch(url);
         const data = await res.json();
         if (res.status === 200) {
@@ -110,6 +125,11 @@ function App() {
             <IssuesList data={dataIssues} />
           )}
         </div>
+        <IssueModal
+          issue={selectedIssue}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
         <div className="fixed-bottom">
           <PaginationA
             pageNum={pageNum}
@@ -117,9 +137,10 @@ function App() {
             totalPageNum={totalPageNum}
           />
         </div>
+
       </Container>
     </>
-    // >>>>>>> master
+
   );
 }
 
