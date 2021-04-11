@@ -40,11 +40,11 @@ const PaginationA = ({ pageNum, setPageNum, totalPageNum }) => {
       </Pagination.Item>
       {/* show the page ellipsis */}
       {pageNum - 1 > 1 && <Pagination.Ellipsis />}
-      {/* {pageNum > 1 && pageNum < totalPageNum && (
+      {pageNum > 1 && pageNum < totalPageNum && (
         <Pagination.Item active>{pageNum}</Pagination.Item>
-      )} */}
+      )}
       {totalPageNum > pageNum + 1 && <Pagination.Ellipsis />}
-      {/* show middle page */}
+      {/* show middle page
       {totalPageNum > 1 && (
         <Pagination.Item
           active={pageNum === Math.floor((totalPageNum - 2) / 2)}
@@ -69,7 +69,7 @@ const PaginationA = ({ pageNum, setPageNum, totalPageNum }) => {
           {(totalPageNum + 1) / 2}
         </Pagination.Item>
       )}
-      {totalPageNum > pageNum + 1 && <Pagination.Ellipsis />}
+      {totalPageNum > pageNum + 1 && <Pagination.Ellipsis />} */}
       {/* show total page and 2 previos*/}
       {totalPageNum > 1 && (
         <Pagination.Item

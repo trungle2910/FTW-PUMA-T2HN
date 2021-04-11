@@ -2,25 +2,22 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
-// <<<<<<< Hoang
-import { Button, Container } from "react-bootstrap";
+
+import { Container } from "react-bootstrap";
 import IssuesList from "./components/IssuesList.js";
 import PaginationA from "./components/Pagination";
 import Navbar from "./components/Navbar";
-// =======
 // import { Container } from "react-bootstrap";
 
 // // import IssuesList from "./components/IssuesList";
-// >>>>>>> master
 
 // import components
-
 import IssueModal from "./components/IssueModal";
 import { faGlasses } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
-  const [owner, setOwner] = useState("facebook");
-  const [repo, setRepo] = useState("react");
+  const [owner, setOwner] = useState("");
+  const [repo, setRepo] = useState("");
   const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -112,7 +109,6 @@ function App() {
       if (!owner || !repo) return;
       setLoading(true);
       try {
-
         const url = `https://api.github.com/repos/${owner}/${repo}/issues?page=${pageNum}&per_page=20`;
 
         const res = await fetch(url);
@@ -135,13 +131,13 @@ function App() {
           setErrorMsg(`FETCH ISSUES ERROR: ${data.message}`);
         }
       } catch (error) {
-        setErrorMsg(`FETCH ISSUES ERROR: ${error.message}`);
+        setErrorMsg("FETCH ISSUES ERROR:", error.message);
         alert(errorMsg);
       }
       setLoading(false);
     };
     fetchIssueData();
-  }, [owner, repo, errorMsg]);
+  }, [owner, repo, errorMsg,pageNum]);
 
   function getOwnerAndRepo() {
     const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
@@ -173,18 +169,6 @@ function App() {
   };
 
   return (
-    // <<<<<<< Hoang
-    //     <div>
-    //       {loading ? (
-    //         <PacmanLoader color={"red"} size={30} margin={5} />
-    //       ) : (
-    //         <>
-    //           <IssuesList data={dataIssues} />
-    //         </>
-    //       )}
-
-    //     </div>
-    // =======
     <>
       <Navbar
         searchInput={searchInput}
@@ -202,7 +186,7 @@ function App() {
         <div>
           {loading ? (
             <div style={{ marginTop: "100px" }}>
-              <ClimbingBoxLoader color={"#36D7B7"} size={50} />
+              <ClimbingBoxLoader color={"#f0b6cd"} size={50} />
             </div>
           ) : (
             <IssuesList data={dataIssues} showDetail={showDetail} />
@@ -217,9 +201,15 @@ function App() {
           handleMore={handleMoreComments}
           disableShowMore={commentPageNum === commentTotalPageNum}
         />
+        <div className="fixed-bottom">
+          <PaginationA
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+            totalPageNum={totalPageNum}
+          />
+        </div>
       </Container>
     </>
-
   );
 }
 

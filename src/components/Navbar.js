@@ -28,41 +28,25 @@ const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
         </div>
 
         <div>
-          <Form>
+          <Form onSubmit={handleSubmit} className="form-search">
             <Form.Row>
               <Col>
                 <Form.Control
-                  className="search-input"
-                  placeholder="{Search...}"
-                  aria-label={searchInput}
-                  aria-describedby="basic-addon1"
-                  onChange={handleInputChange}
-                ></Form.Control>
-              </Col>
-              <Col>
-                <Button variant="success">Success</Button>{" "}
-              </Col>
-            </Form.Row>
-          </Form>
-          {/* <Form onSubmit={handleSubmit} className="form-search">
-            <Form.Row>
-              <Col>
-                <Form.Control
-                  className="search-input"
-                  placeholder="Search"
-                  aria-label="Search"
-                  aria-describedby="basic-addon1"
+                  id="search-input"
+                  type="text"
+                  placeholder="Search.."
+                  value={searchInput}
                   onChange={handleInputChange}
                 />
               </Col>
               {loading ? (
-                <Button variant="succes" type="button" disabled>
+                <Button variant="info" type="button" disabled>
                   <span
                     className="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
-                  {searchInput}
+                  Searching...
                 </Button>
               ) : (
                 <Button type="submit" variant="success" disabled={!searchInput}>
@@ -70,10 +54,10 @@ const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
                 </Button>
               )}
             </Form.Row>
-          </Form> */}
+          </Form>
         </div>
         <div>
-          <a href="https://github.com/coderschool/ftw_w5_github_issues">
+          <a href="https://github.com/trungle2910/FTW-PUMA-T2HN">
             {" "}
             <img
               className="github-re-size"

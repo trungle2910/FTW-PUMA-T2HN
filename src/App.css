@@ -6,6 +6,15 @@ body {
   background-color: #282c34;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(to right, #ff5858, #f857a6);
+  position: fixed;
+}
 .nav-text {
   grid-area: text;
   font-family: "Sarpanch", sans-serif;
