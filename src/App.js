@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PacmanLoader from "react-spinners/PacmanLoader";
-import { Container } from "react-bootstrap";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+// <<<<<<< Hoang
+import { Button, Container } from "react-bootstrap";
+import IssuesList from "./components/IssuesList.js";
+import PaginationA from "./components/Pagination";
 import Navbar from "./components/Navbar";
-import IssuesList from "./components/IssuesList";
+// =======
+// import { Container } from "react-bootstrap";
+
+// // import IssuesList from "./components/IssuesList";
+// >>>>>>> master
 
 // import components
 
@@ -18,6 +25,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [dataIssues, setDataIssues] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPageNum, setTotalPageNum] = useState(1);
 
   // state for modal
   const [selectedIssue, setSelectedIssue] = useState(null);
@@ -103,11 +112,28 @@ function App() {
       if (!owner || !repo) return;
       setLoading(true);
       try {
-        const url = `https://api.github.com/repos/${owner}/${repo}/issues`;
+
+        const url = `https://api.github.com/repos/${owner}/${repo}/issues?page=${pageNum}&per_page=20`;
+
         const res = await fetch(url);
         const data = await res.json();
-        setDataIssues(data);
-        console.log(data);
+        if (res.status === 200) {
+          const link = res.headers.get("link");
+
+          if (link) {
+            const getTotalPage = link.match(
+              /page=(\d+)&per_page=\d+>; rel="last"/
+            ); // regular expression
+            if (getTotalPage) {
+              setTotalPageNum(parseInt(getTotalPage[1]));
+            }
+          }
+          setDataIssues(data);
+          setErrorMsg(null);
+          console.log(data);
+        } else {
+          setErrorMsg(`FETCH ISSUES ERROR: ${data.message}`);
+        }
       } catch (error) {
         setErrorMsg(`FETCH ISSUES ERROR: ${error.message}`);
         alert(errorMsg);
@@ -147,6 +173,18 @@ function App() {
   };
 
   return (
+    // <<<<<<< Hoang
+    //     <div>
+    //       {loading ? (
+    //         <PacmanLoader color={"red"} size={30} margin={5} />
+    //       ) : (
+    //         <>
+    //           <IssuesList data={dataIssues} />
+    //         </>
+    //       )}
+
+    //     </div>
+    // =======
     <>
       <Navbar
         searchInput={searchInput}
@@ -163,12 +201,13 @@ function App() {
 
         <div>
           {loading ? (
-            <PacmanLoader color={"red"} size={30} margin={5} />
+            <div style={{ marginTop: "100px" }}>
+              <ClimbingBoxLoader color={"#36D7B7"} size={50} />
+            </div>
           ) : (
             <IssuesList data={dataIssues} showDetail={showDetail} />
           )}
         </div>
-
         <IssueModal
           issue={selectedIssue}
           showModal={showModal}
@@ -180,6 +219,7 @@ function App() {
         />
       </Container>
     </>
+
   );
 }
 
