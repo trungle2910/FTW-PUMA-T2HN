@@ -6,6 +6,22 @@ import { Form, Button, Col } from "react-bootstrap";
 const Navbar = ({ searchInput, handleInputChange, handleSubmit, loading }) => {
   return (
     <>
+      {/* <nav className="nav">
+        <div>
+          <img className="logo-re-size" src={logo} alt="coder-img" />
+        </div>
+        <div>
+          <a href="https://github.com/coderschool/ftw_w5_github_issues">
+            {" "}
+            <img
+              className="github-re-size"
+              src={github}
+              alt="github-img"
+            />{" "}
+          </a>
+        </div>
+      </nav> */}
+
       <nav className="navbar">
         <div className="logo">
           <img className="logo-re-size" src={logo} alt="coder-img" />

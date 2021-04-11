@@ -14,14 +14,14 @@ const SearchBar = ({
           <Form.Control
             placeholder="Search..."
             value={searchInput}
-            onchange={handleInputChange}
+            onChange={handleInputChange}
           />
         </Col>
 
         {loading ? (
-          <Button disabled>Seach...</Button>
+          <Button disabled>Searching...</Button>
         ) : (
-          <Button type="submit">Seach</Button>
+          <Button type="submit">Search</Button>
         )}
       </Form.Row>
     </Form>

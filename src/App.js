@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar";
 
 // import components
 import IssueModal from "./components/IssueModal";
+import { faGlasses } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [owner, setOwner] = useState("");
@@ -28,11 +29,79 @@ function App() {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  // state for issue comments
+  const [commentsFetchUrl, setCommentsFetchUrl] = useState("");
+  const [comments, setComments] = useState([]);
+  const [loadingComments, setLoadingComments] = useState(false);
+  const [commentPageNum, setCommentPageNum] = useState(1);
+  const [commentTotalPageNum, setCommentTotalPageNum] = useState(1);
+
   const showDetail = (item) => {
     setShowModal(true);
 
-    setSelectedIssue(item);
+    if (
+      selectedIssue?.number !== item.number ||
+      selectedIssue?.number === item.number
+    ) {
+      setComments([]);
+      setCommentPageNum(1);
+      setCommentTotalPageNum(1);
+      setSelectedIssue(item);
+      setCommentsFetchUrl(
+        `https://api.github.com/repos/${owner}/${repo}/issues/${item.number}/comments?page=1&per_page=5`
+      );
+    }
   };
+
+  const handleMoreComments = () => {
+    if (commentPageNum >= commentTotalPageNum) return;
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/issues/${
+      selectedIssue.number
+    }/comments?page=${commentPageNum + 1}&per_page=5`;
+    setCommentPageNum((num) => num + 1);
+    setCommentsFetchUrl(url);
+  };
+
+  // fetch issue comment url
+  useEffect(() => {
+    const fetchComments = async () => {
+      if (!commentsFetchUrl && !showModal) return;
+
+      setLoadingComments(true);
+
+      try {
+        const response = await fetch(commentsFetchUrl);
+        const data = await response.json();
+
+        if (response.status === 200) {
+          const link = response.headers.get("link");
+          if (link) {
+            const getTotalPage = link.match(
+              /page=(\d+)&per_page=\d+>; rel="last"/
+            );
+            if (getTotalPage) {
+              setCommentTotalPageNum(parseInt(getTotalPage[1]));
+            }
+          }
+          setComments((comment) => [...comment, ...data]);
+          setErrorMsg(null);
+        } else {
+          setErrorMsg(`Fetch Comments Error: ${data.message}`);
+          setShowModal(false);
+        }
+
+        console.log(data);
+      } catch (error) {
+        setErrorMsg(`Fetch comments error: ${error.message}`);
+        setShowModal(false);
+      }
+
+      setLoadingComments(false);
+    };
+
+    fetchComments();
+  }, [commentsFetchUrl, showModal]);
 
   // fetch issue data cơ bản chỉ với base url
   useEffect(() => {
@@ -68,7 +137,7 @@ function App() {
       setLoading(false);
     };
     fetchIssueData();
-  }, [owner, repo, pageNum]);
+  }, [owner, repo, errorMsg,pageNum]);
 
   function getOwnerAndRepo() {
     const repo = searchInput.substring(searchInput.lastIndexOf("/") + 1);
@@ -83,9 +152,22 @@ function App() {
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
     const { owner, repo } = getOwnerAndRepo();
-    setOwner(owner);
-    setRepo(repo);
+    const temp = searchInput.split("/");
+    if (temp.length === 2) {
+      setOwner(owner);
+      setRepo(repo);
+    } else if (
+      temp[0] === "https:" &&
+      temp[1] === "" &&
+      temp[2] === "github.com"
+    ) {
+      setOwner(owner);
+      setRepo(repo);
+    } else {
+      setErrorMsg("Wrong format of search Input");
+    }
   };
+
   return (
     <>
       <Navbar
@@ -99,19 +181,25 @@ function App() {
         fluid
         className=" justify-content-center align-content-center text-center"
       >
+        {/* Search bar here */}
+
         <div>
           {loading ? (
             <div style={{ marginTop: "100px" }}>
               <ClimbingBoxLoader color={"#f0b6cd"} size={50} />
             </div>
           ) : (
-            <IssuesList data={dataIssues} />
+            <IssuesList data={dataIssues} showDetail={showDetail} />
           )}
         </div>
         <IssueModal
           issue={selectedIssue}
           showModal={showModal}
           setShowModal={setShowModal}
+          comments={comments}
+          loadingComments={loadingComments}
+          handleMore={handleMoreComments}
+          disableShowMore={commentPageNum === commentTotalPageNum}
         />
         <div className="fixed-bottom">
           <PaginationA
