@@ -2,9 +2,6 @@
 .App {
   text-align: center;
 }
-body {
-  background-color: #282c34;
-}
 
 .navbar {
   display: flex;
