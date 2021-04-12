@@ -83,7 +83,6 @@ const Item = ({ listData, showDetail }) => {
         />
         {listData.labels.map((label) => (
           <Badge
-            key={label.id}
             pill
             variant="info"
             className="mr-3"
