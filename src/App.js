@@ -16,8 +16,8 @@ import IssueModal from "./components/IssueModal";
 import { faGlasses } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
-  const [owner, setOwner] = useState("");
-  const [repo, setRepo] = useState("");
+  const [owner, setOwner] = useState("facebook");
+  const [repo, setRepo] = useState("react");
   const [searchInput, setSearchInput] = useState("facebook/react");
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");

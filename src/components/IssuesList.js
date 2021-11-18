@@ -70,9 +70,9 @@ const Item = ({ listData, showDetail }) => {
             </span>
           </div>
           <p className="mr-5">
-            {listData.body.length <= 400
-              ? listData.body
-              : listData.body.slice(0, 400) + "......"}
+            {listData?.body?.length <= 400
+              ? listData?.body
+              : listData?.body?.slice(0, 400) + "......"}
           </p>
         </div>
         <FontAwesomeIcon
